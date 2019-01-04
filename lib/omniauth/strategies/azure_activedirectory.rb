@@ -113,6 +113,7 @@ module OmniAuth
         params[:state] = state unless state.nil?
         params[:prompt] = prompt unless prompt.nil?
         params[:login_hint] = login_hint unless login_hint.nil?
+        params[:domain_hint] = domain_hint unless domain_hint.nil?
 
         uri = URI(openid_config['authorization_endpoint'])
         uri.query = URI.encode_www_form(params)
@@ -272,6 +273,18 @@ module OmniAuth
       # @return String
       def login_hint
         options[:login_hint] || nil
+      end
+
+      ##
+      # Can be one of consumers or organizations. If included, it will skip the
+      # email-based discovery process that user goes through on the v2.0 sign in
+      # page, leading to a slightly more streamlined user experience. Often apps
+      # will use this parameter during re-authentication, by extracting the tid
+      # claim from the id_token.
+      #
+      # @return String
+      def domain_hint
+        options[:domain_hint] || nil
       end
 
       ##
