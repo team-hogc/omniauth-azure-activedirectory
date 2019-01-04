@@ -273,7 +273,7 @@ module OmniAuth
       def login_hint
         options[:login_hint] || nil
       end
-      
+
       ##
       # The keys used to sign the id token JWTs. This is just a memoized version
       # of #fetch_signing_keys.
